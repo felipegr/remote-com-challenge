@@ -16,11 +16,11 @@ def get_index():
 def get_connections(id):
     q = "match (a)-->(x)-->(b) where a.name = {id} and b.name <> {id} "+\
         "return distinct b.name"
-    second_degree = gdb.query(q, params={'id': id}, returns=(int))
+    second_degree = gdb.query(q, params={'id': str(id)}, returns=(int))
     
     q = "match (a)-->(x)-->(y)-->(b) where a.name = {id} and b.name <> {id}" +\
         " and y.name <> {id} and b.name <> x.name return distinct b.name"
-    third_degree = gdb.query(q, params={'id': id}, returns=(int))
+    third_degree = gdb.query(q, params={'id': str(id)}, returns=(int))
     
     sec_nodes = []
     thrd_nodes = []
